@@ -1,0 +1,51 @@
+//第一种
+
+登录后点击“+”
+选择 第一项：NEW repository,
+选择MTL
+然后在开发软件中使用git clone “创建的项目地址xxxxx”
+然后把需要上传到这个项目文件夹拷贝过去，
+进入项目目录
+初始化 git status 红色的表示初始化成功
+添加 git add .
+提交 git commit -m '初始化项目' 这是提交本地
+提交git上 git push
+
+
+//第二种方式
+在git上创建仓库 
+在线项目下下面有这些命令
+git remote add origin https://github.com/aixiafeifly/vue_test.git
+git push -u origin master
+
+
+报错问题解决:
+先执行：git remote rm origin 然后再执行以上
+aixiafeifly AXF911127000fly
+
+项目中使用git 
+ 新建项目。
+ git init 
+ git commit -m "初始化项目"
+git remote add origin https://github.com/aixiafeifly/vue_test.git
+git push -u origin master
+
+报错问题解决:
+先执行：git remote rm origin 然后再执行以上
+aixiafeifly AXF911127000fly
+创建分支：
+git add .
+git commit -m "分支1"
+git tag 分支1
+git log 
+git reset "sdfdsfk" 这是复制上面git log 打印出来的
+git reset --hard 'sdfdsfk'
+
+git push --tags 上传 
+
+git clone下来的代码进入不同分支：
+git chechout -b
+然后进入对应的目录即可
+
+vue init webpack learnvuerouter基于webpack创建项目 vue@2.5
+vue create 'name'

@@ -1,0 +1,442 @@
+配置别名后的写法: 在别名前面加~ 如配置的别名是views 则写成——'~views'
+
+生命週期：
+
+生命週期函數:创建，挂载，更新，销毁
+
+数组响应式:
+  push() 添加
+  pop() 删除最后一个
+  shift() 删除第一个
+  unshift() 最前面添加
+  splice() 删除，替换，插入
+  splice(start的位置的下标,删除从开始位置的后面得几个参数,替换的参数)
+  sort()排序 这里得参数可以是函数
+  sort((a,b)=>{ return a.id<b.id;})
+  remove() 翻转
+
+这个方法可以操作数组和对象
+vue.set方法 三个参数 1.对象，2索引值，3修改后的值
+对象方法api
+delete 刪除
+
+
+
+1循环:
+
+for(let i=0;i<arr.leght;i++)
+for(let i in arr)
+for(let i of arr)
+reduce((a,b)=>{})累加函數，
+map映射，
+filter筛选 符合條件就返回，
+includes()方法判断是否包含某一元素,返回true或false表示是否包含元素，对NaN一样有效
+
+----------双向数据绑定
+input: @input="fn($event)" event.target获取值，或者是是否选中
+
+-----------组件
+Vue.extend()构造器优化成语法糖写法
+语法糖:
+Vue.component('cpm1',{   这也是全局组件
+  template:   
+      <div>
+        
+      </div>
+})
+
+---------组件分离·
+第一种:　使用srcipt
+ 第一步:.<srcipt type=("text/x-template" id="idCOM1">
+    <div>
+      <h1></h1>
+    </div>
+  </srcipt>
+ 第二步挂载：
+  Vue.component(
+    'cpm1',{
+      template:"#idCOM1" 绑定上面的ID
+    }
+  )
+第二种:　使用template
+ 直接使用模板 
+　第一步： <template id="idCOM2">
+        　</template>
+  第二步：
+          Vue.component(
+            'cpm2',{
+              template:"#idCOM2" 绑定上面的ID
+            }
+          )
+
+---------------传值　富川字 props
+类型：Array ，boolean，string，number，Function,Date,object...等
+这些类型都有以下属性：
+    default:"默认值" ,
+    required:true , 使用组件时候必须传值
+  如果类型是对象object 
+               default(){ 这是必须是一个函数返回值
+                 return{}
+               }  
+props驼峰标识  props:{cInfo:String}  传值的时候 :c-info="" 
+
+-----*********************************父访问子 this.$children，拿到所有的子组件，this.$refs在組件中使用ref定義
+
+-----*********************************子访问父 this.$parent
+-----------------------插槽，slot 
+    1-使用组件的时候里面没有内容的时候会使用slot的默认值，有内容的时候会替换slot的内容
+    2-使用组件时，内容标签上有slot="名字"这个属性的时候，那么在组件内使用slot时使用添加name="名字"，就会添加到对应的插槽中。
+    
+-----------------------作用域插槽
+    1- 父拿到子的对象
+    插槽 :  <slot :名称="user"> 使用<cpn2 v-slot="slotProps"> {{slotProps.名字}} 这里得名字对应slot里面的命名   
+    
+
+
+
+－－－－－－－－－－－－－－－－－－－－－－导出导入
+      export 
+      导入:import {a,b,c,d,e,g} from 'aa.js' 
+      等同于 import * as aaaa from 'aa.js'      使用的时候aaaa.a就可以使用 ，* as通配符
+
+      export default 在模块中不允许存在多个，也只能导出一个，import并且导入的时候不需要｛｝,导入的名字可以自定义，
+      
+
+
+－－-----------------------------------------------------webpack使用过程
+指定webpack版本: npm install webpack@3.6.0 -g
+查看版本:npm info webpack 
+
+//**********************************路由
+不刷新：
+      location.hash=""　，
+      history.pushState({},'','home')　這是有历史记录的，可以返回
+      history.replaceState({},'','home')　這是沒有返回的
+      返回：history.back()===history.go(-1)   
+      向前：history.forward()===history.go(1)  
+      history.go(数字) 正负都行动态数字 
+
+&&*******************************************router相关配置
+　解决＃号问题
+<router-link to="/login" 　tag="button" 　replace>登录</router-link>  添加replace就没有返回键
+编程式导航   ： 
+传参的形式有params,query
+   query要用path来引入，params要用name来引入 ,　　params相当于类似get,query类似post
+   query传参，刷新页面不会丢失参数。但是params会丢参的，
+
+        this.$router.push({})
+        this.$replace({})
+取参数：　$route.query.id　｜｜　$route.params.id
+路由懒加载：
+    const()=>import('@/components/login')　　　　　component:login
+路由嵌套：
+  children:[
+    {path:'news',name:'news',component:()=>import('@/components/news')},
+    {path:'messges',name:'messges',component:()=>import('@/components/messges')},
+]
+
+*****************************************全局导航守卫
+router.beforeEach
+router.afterEach....
+
+
+*****************************************keep-alive缓存
+
+activated(),deactivated()这两个函数，只有在改组件使用了keep-alive时，才会生效
+include - 字符串或正则表达式。只有名称匹配的组件会被缓存。　  
+exclude - 字符串或正则表达式。任何名称匹配的组件都不会被缓存。
+<keep-alive include="name,name">  name取值下面的messges
+  <router-views/>
+</keep-alive>
+export default {
+    name:'messges',
+}    
+
+
+
+
+*************************配置了別名　　在图片中可以使用～表示别名前面的路径
+
+******************************************promise
+
+
+
+
+
+
+
+
+**********************************************vuex
+***************getters,注意里面的所有对象只能传两个参数，一个是state,对象一個是getters对象，不能多传
+
+  const getters={
+  getStu(state){
+   return state.students.filter(item=>
+      item.age>20
+    )
+  }, 
+  //调用getters对象里面的方法   //第二参数就算是自定义的名称也是getters对象      
+  getStuLength(state,getters){   //这里传入的第二个参数是上面定义的getters对象——>const getters
+     return getters.getStu.length　　
+  }
+}
+如果必须动态传入参数可以使用返回函数的方法解决这个问题　 {{$store.getters.getStuAge(18)}}
+ getStuAge(state){　
+    return function(age){　　//这里返回函数就可以拿到动态传入的值　　
+      return age+"sdfasd"　 //这里拿到传入的值就可以进行处理 ，最后就可以把这getStuAge当做属性使用
+    }
+  }
+简便写法：同上一樣
+ getStuAge(state){　
+    return age=> age+"sdfasd"
+     return age=> {
+       return age+"sdfasd"
+      }  
+  }
+***************mutations
+
+触发使用：两种
+    第一种：  this.$store.commit('FNmutation',data)
+    第二种：  this.$store.commit({
+                  type:'FNmutation',
+                  data:'32332'
+                })
+ mutations:响应式      
+            FNuserinfo(state){
+              console.log(state.userInfo)
+              //不是响应式
+              // state.userInfo[DA]='HAHA'
+              // delete state.userInfo.age 
+              //响应式式操作：
+              // Vue.set(state.userInfo,'eee', DA)
+            // Vue.delete(state.userInfo,'name')
+            
+            }
+************************* mutations常量类型　　
+
+
+
+
+
+
+
+
+
+
+            }
+************************* actions   也可以是对象的方式{}
+FNaction(){
+      // 第一种
+      // 1－不传参
+      //  this.$store.dispatch('updataInfo')
+      // // 2-传参
+      // this.$store.dispatch('updataInfo','传参')
+      // 3-可以传对象
+    //  this.$store.dispatch('updataInfo',{
+    //    message:'攜帶的参数',
+    //    success:()=>{
+    //      console.log('已经完成里面的')
+    //    }
+    //  })
+
+    //第二种以ｐｒｏｍｉｓｅ的形式
+    this.$store.dispatch('updataInfo',{
+       message:'攜帶的参数',
+       success:()=>{
+         console.log('已经完成里面的')
+       }
+     }).then(res=>{
+       console.log(res,'SDF')
+     })
+
+    }
+
+
+const actions={
+  updataInfo(context,data){ 也可以是对象的方式{}
+    // 第一种
+    // setTimeout(() => {
+    //   console.log(data.message);
+    //   data.success()
+    //   // context.commit('fnactive',data)
+    // }, 1000);
+    // 第二种
+    return new Promise((res,err)=>{
+      setTimeout(() => {
+        console.log(data.message);
+        data.success()
+        res('ＶＵＥＸ中传过来的')
+        // context.commit('fnactive',data)
+      }, 1000);
+    })
+  }
+}
+
+
+************************* 拿到根的数据
+  rootState,
+  rootGetters
+
+
+
+
+×××××××××××××××××××××××××模块modules
+  export default new Vuex.Store({
+  state,
+  getters,
+  actions,
+  mutations,
+  modules:{
+      a:modulesA
+    }
+  });
+
+
+*************************网络封装axios
+
+基本使用：
+    axios({
+      url:"http://123.207.32.32:8000/api/v1/home/data",
+      params:{
+        type:'sell',
+        page:1
+      }
+    }).then(res=>{
+      console.log(res)
+    })
+
+
+*****************发送并发请求:跟promise一样使用
+
+  axios.all([
+    axios({}),axios({})
+  ]).then(res=>{
+
+  })
+
+axios.all([
+  axios({
+    url:"http://123.207.32.32:8000/api/v1/home/data",
+    params:{
+      type:'sell',
+      page:1
+    }
+  }),
+  axios({
+    url:"http://123.207.32.32:8000/api/v1/home/multidata"
+  })
+]).then(res=>{
+  console.log(res)
+})
+
+
+//全局：
+// //全局axios对应的网络配置　只有唯一的请求ip
+// axios.defaults.baseURL="http://123.207.32.32:8000/api/v1/"
+// axios.defaults.timeout="5000"
+
+
+
+
+//创建实例解决多个请求地址Ｉｐ的不同
+//创建实例 好处就是请求多个同的地址时不会有影响 可以多个ip
+const instancel=axios.create({
+  baseURL:"http://123.207.32.32:8000/api/v1/",
+  timeout:"5000"
+})
+  instancel({
+    url:'home/data',
+    params:{
+      type:'sell',
+      page:1
+    }
+  }).then(res=>{
+    console.log(res)
+  })
+  instancel({
+    url:'home/multidata',
+    
+  }).then(res=>{
+    console.log(res)
+  })
+
+
+  const instancel2=axios.create({
+    baseURL:"http://K;LLKSDFIP",
+    timeout:"5000"
+  })
+
+××××××××××××××××××××××××××××××××××××××××××  axios模块封装
+
+
+import axios from 'axios'
+
+//第一种
+export function request(config){
+ return new Promise((resolve,reject)=>{
+    const instance=axios.create({
+      baseURL:'',
+      timeout:5000,
+    })
+    instance(config).then(res=>{
+      resolve(res)
+    })
+    .catch(error=>{
+    })
+ })
+}
+//第二种
+export function request(config){
+     const instance=axios.create({
+       baseURL:'',
+       timeout:5000,
+     })
+    return instance(config)  //其实instance就是一个promise
+   
+  }
+
+  request({
+    url:''
+  }).then(res=>{
+
+  })
+
+  ××××××××××××××××××××××××××××××××××××××××××  axios拦截器的使用
+  export function request(config){
+     const instance=axios.create({
+       baseURL:'http://123.207.32.32:8000/api/v1/',
+       timeout:5000,
+       //还有请求头...headers 如：headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+     })
+
+
+
+    //  拦截器
+    //这是拦截全局
+    // axios.interceptors
+    //这是拦截实例，也就是请求
+    instance.interceptors.request.use(
+      config=>{
+      // 请求成功可以处理那些
+        //1.比如config中的一些信息不符合服务器要求的，如：携带的请求头head
+        //2.网络请求的时候显示一个请求图标。消失的时候在下面响应中处理
+        //3.某些网络请求（登录的token）,必须携带一些特殊的信息
+
+
+      return config  //这里必须return config 
+    },
+    Error=>{
+
+    })
+    instance.interceptors.response.use(
+      res=>{
+        console.log(res)
+        return res.data
+      },
+      err=>{
+        console.log(err)
+    })
+
+    return instance(config)  //其实instance就是一个promise
+   
+  }
